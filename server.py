@@ -34,13 +34,7 @@ def write_requests(items):
 
 
 def notify_clients(payload):
-    """Send a JSON payload to all connected SSE clients.
-
-    The payload should be a Python object that is JSON serialisable. We push the
-    same JSON string to every client queue. If a queue cannot accept a message
-    because the client is gone, we ignore and cleanup later when the client
-    thread fails to write.
-    """
+    """Send a JSON payload to all connected SSE clients."""
     try:
         message = json.dumps(payload, ensure_ascii=False)
     except Exception:
@@ -50,8 +44,6 @@ def notify_clients(payload):
             try:
                 q.put_nowait(message)
             except queue.Full:
-                # If a client's queue is full, skip it — the client will likely be
-                # removed when its thread fails to write.
                 continue
 
 
@@ -65,6 +57,9 @@ class RoadRescueHandler(SimpleHTTPRequestHandler):
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-store")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
         for name, value in (extra_headers or {}).items():
             self.send_header(name, value)
         self.end_headers()
@@ -76,6 +71,13 @@ class RoadRescueHandler(SimpleHTTPRequestHandler):
             raise ValueError("Request body is empty or too large")
         return json.loads(self.rfile.read(length))
 
+    def do_OPTIONS(self):
+        self.send_response(204)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+        self.end_headers()
+
     def do_GET(self):
         path = urlparse(self.path).path
         if path == "/roadrescue-requests.json":
@@ -83,26 +85,24 @@ class RoadRescueHandler(SimpleHTTPRequestHandler):
         if path == "/api/requests":
             return self.send_json(200, read_requests())
 
-        # Server-Sent Events stream for local-server mode
         if path == "/api/requests/stream":
-            # Prepare SSE response headers
             self.send_response(200)
             self.send_header("Content-Type", "text/event-stream; charset=utf-8")
             self.send_header("Cache-Control", "no-cache")
             self.send_header("Connection", "keep-alive")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type")
             self.end_headers()
 
             q: queue.Queue = queue.Queue(maxsize=64)
             with CLIENTS_LOCK:
                 CLIENT_QUEUES.append(q)
 
-            # Send an initial event with the full current list
             try:
                 initial = json.dumps(read_requests(), ensure_ascii=False)
                 self.wfile.write(f"data: {initial}\n\n".encode("utf-8"))
                 self.wfile.flush()
             except Exception:
-                # If we can't write the initial payload, remove the queue and exit
                 with CLIENTS_LOCK:
                     try:
                         CLIENT_QUEUES.remove(q)
@@ -110,7 +110,6 @@ class RoadRescueHandler(SimpleHTTPRequestHandler):
                         pass
                 return
 
-            # Keep the connection open and forward queued messages to this client.
             try:
                 while True:
                     message = q.get()
@@ -120,7 +119,6 @@ class RoadRescueHandler(SimpleHTTPRequestHandler):
                     except Exception:
                         break
             finally:
-                # Client disconnected or an error occurred — remove its queue.
                 with CLIENTS_LOCK:
                     try:
                         CLIENT_QUEUES.remove(q)
@@ -133,7 +131,6 @@ class RoadRescueHandler(SimpleHTTPRequestHandler):
             item = next((row for row in read_requests() if row.get("reference") == reference), None)
             if not item:
                 return self.send_json(404, {"error": "Not found"})
-            # Public tracking returns progress details only, never contact or incident data.
             progress = {key: item.get(key) for key in ("reference", "service", "area", "landmark", "status", "createdAt")}
             return self.send_json(200, progress)
         return super().do_GET()
@@ -152,13 +149,7 @@ class RoadRescueHandler(SimpleHTTPRequestHandler):
                 return self.send_json(409, {"error": "Reference already exists"})
             items.append(item)
             write_requests(items)
-
-            # Notify SSE clients about the new state
-            try:
-                notify_clients(items)
-            except Exception:
-                pass
-
+            notify_clients(items)
             return self.send_json(201, {"ok": True})
         except (ValueError, json.JSONDecodeError) as error:
             return self.send_json(400, {"error": str(error)})
@@ -180,13 +171,7 @@ class RoadRescueHandler(SimpleHTTPRequestHandler):
                 return self.send_json(404, {"error": "Not found"})
             item["status"] = changes["status"]
             write_requests(items)
-
-            # Notify SSE clients about the change
-            try:
-                notify_clients(items)
-            except Exception:
-                pass
-
+            notify_clients(items)
             return self.send_json(200, {"ok": True})
         except (ValueError, json.JSONDecodeError) as error:
             return self.send_json(400, {"error": str(error)})
@@ -201,13 +186,7 @@ class RoadRescueHandler(SimpleHTTPRequestHandler):
             return self.send_json(404, {"error": "Not found"})
         try:
             write_requests(remaining)
-
-            # Notify SSE clients about the deletion
-            try:
-                notify_clients(remaining)
-            except Exception:
-                pass
-
+            notify_clients(remaining)
             return self.send_json(200, {"ok": True})
         except OSError as error:
             return self.send_json(500, {"error": str(error)})
@@ -230,6 +209,7 @@ def main():
         print("RoadRescue demo server is running. Keep this window open.")
         print("On this laptop: http://localhost:8000/admin.html")
         print(f"On phones using the same Wi-Fi: http://{lan_ip}:8000/")
+        print("If you expose this laptop or a tunnel, use the public HTTPS URL instead.")
         print("Press Ctrl+C to stop the server.")
         server.serve_forever()
     except KeyboardInterrupt:
