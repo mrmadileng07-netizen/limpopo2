@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Roadside help in rural Limpopo</title>
+  <desc id="desc">A vehicle on a country road beneath the hills, with a local rescue vehicle on its way.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#77b9d0"/><stop offset="1" stop-color="#d8edf0"/></linearGradient>
+    <linearGradient id="road" x2="0" y2="1"><stop stop-color="#455769"/><stop offset="1" stop-color="#263848"/></linearGradient>
+    <linearGradient id="hill" x2="0" y2="1"><stop stop-color="#648c73"/><stop offset="1" stop-color="#345d51"/></linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#sky)"/>
+  <circle cx="936" cy="145" r="62" fill="#ffd27e" opacity=".95"/>
+  <path d="M0 356 160 234l122 91 167-171 179 178 134-122 167 149 122-120 149 122v183H0z" fill="#789b82"/>
+  <path d="m0 399 179-98 154 103 171-134 163 113 159-93 174 117 127-87 73 53v187H0z" fill="url(#hill)"/>
+  <path d="M0 435q174-43 338 7t333-4q175-47 529 12v270H0z" fill="#9ab17a"/>
+  <path d="M0 537q247-47 456 6t358-4q202-50 386 8v173H0z" fill="#6f8c61"/>
+  <g fill="#355b4b" opacity=".88"><path d="m87 511 34-92 36 92h-22v50h-27v-50zM247 506l28-75 31 75h-18v43h-23v-43zM1034 512l35-95 35 95h-22v55h-27v-55zM1118 513l26-70 29 70h-17v43h-22v-43z"/></g>
+  <path d="M411 720 550 455h105l161 265z" fill="url(#road)"/>
+  <path d="m576 720 35-265h16l34 265z" fill="#e8d99c" opacity=".86"/>
+  <path d="M0 648q213-44 421 10l-4 62H0zM860 643q169-48 340-5v82H860z" fill="#45664f"/>
+  <!-- stranded car -->
+  <g transform="translate(376 473)">
+    <ellipse cx="110" cy="137" rx="138" ry="21" fill="#1b303b" opacity=".3"/>
+    <path d="M18 83q6-31 37-42l40-44q13-14 33-14h59q25 0 38 22l31 39q27 6 32 35l-5 35H17z" fill="#f3f5f3"/>
+    <path d="m105 9-40 42h84V-17h-21q-13 0-23 11" fill="#82bac8"/>
+    <path d="M162-17v68h73l-28-39q-10-29-33-29z" fill="#82bac8"/>
+    <path d="M16 79h268l7 35H16z" fill="#d62839"/>
+    <path d="M38 65h220" stroke="#fff" stroke-width="7" opacity=".9"/>
+    <rect x="8" y="88" width="18" height="13" rx="4" fill="#ffca75"/><rect x="274" y="88" width="17" height="13" rx="4" fill="#ffca75"/>
+    <circle cx="67" cy="116" r="24" fill="#172b39"/><circle cx="67" cy="116" r="11" fill="#b8c6c9"/>
+    <circle cx="235" cy="116" r="24" fill="#172b39"/><circle cx="235" cy="116" r="11" fill="#b8c6c9"/>
+    <path d="M114 61h45" stroke="#d62839" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <!-- approaching local assistance -->
+  <g transform="translate(749 424) scale(.72)">
+    <ellipse cx="105" cy="154" rx="123" ry="17" fill="#1b303b" opacity=".25"/>
+    <path d="M16 83q8-32 42-39l39-31h82q22 0 36 25l23 13q18 6 22 29v37H15z" fill="#f6f7f3"/>
+    <path d="M105 25 73 53h71V13h-23q-8 0-16 12" fill="#87bac4"/><path d="M155 13v40h61l-23-29q-11-11-25-11z" fill="#87bac4"/>
+    <path d="M17 75h240v33H17z" fill="#d62839"/><path d="M99 73h58" stroke="#f4c34e" stroke-width="6"/>
+    <rect x="127" y="2" width="35" height="9" rx="4" fill="#ff5967"/><path d="M140 0v-9m10 9v-9" stroke="#fff" stroke-width="3"/>
+    <circle cx="66" cy="119" r="21" fill="#172b39"/><circle cx="66" cy="119" r="9" fill="#b8c6c9"/><circle cx="215" cy="119" r="21" fill="#172b39"/><circle cx="215" cy="119" r="9" fill="#b8c6c9"/>
+  </g>
+  <!-- location marker -->
+  <g transform="translate(588 318)"><path d="M0-48c-25 0-44 19-44 43 0 33 44 71 44 71s44-38 44-71C44-29 25-48 0-48" fill="#d62839" stroke="#fff" stroke-width="7"/><circle cy="-5" r="14" fill="#fff"/><path d="M-5-5h10m-5-5v10" stroke="#d62839" stroke-width="3" stroke-linecap="round"/></g>
+  <g fill="#f4e8b6"><path d="m192 628 9-24 9 24h-6v13h-6v-13zM1052 621l8-22 9 22h-5v12h-6v-12zM308 584l7-18 7 18h-5v10h-5v-10z"/></g>
+</svg>

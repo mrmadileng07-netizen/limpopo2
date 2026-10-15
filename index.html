@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102a43">
+  <meta name="description" content="RoadRescue SA is a rural-first roadside assistance designed for Limpopo communities.">
+  <title>RoadRescue SA | Limpopo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="RoadRescue SA home">
+      <img class="brand-icon" src="roadrescue-logo.svg" alt="">
+      <span>RoadRescue <b>SA</b><small>LIMPOPO EDITION</small></span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" type="button" aria-controls="mainNav"
+      aria-label="Open navigation" aria-expanded="false">Menu</button>
+
+    <nav id="mainNav">
+      <a href="#home" data-en="Home" data-ns="Gae">Home</a>
+      <a href="#services" data-en="Services" data-ns="Ditirelo">Services</a>
+      <a href="#request" data-en="Request help" data-ns="Kgopela thušo">Request help</a>
+      <a href="#track" data-en="Track request" data-ns="Latela kgopelo">Track request</a>
+      <button id="languageToggle" class="language-button">Sepedi</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <span class="eyebrow">RURAL ROADS. LOCAL SOLUTIONS.</span>
+        <h1 data-en="Stranded on the road? You don't have to face it alone."
+            data-ns="O šaletše tseleng? Ga se wa swanela go lebeletšana le bothata o nnoši.">
+          Stranded on the road? You don't have to face it alone.
+        </h1>
+        <p data-en="A rural-first roadside assistance designed for Limpopo, connecting drivers with local help."
+           data-ns="Tirišo ya thušo ya tseleng ya dinagamagae ya Limpopo, yeo e hlametšwego go kgokaganya baotledi le thušo ya kgauswi.">
+          A rural-first roadside assistance service designed for Limpopo, connecting drivers with local help.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-danger" href="#request">Request roadside help</a>
+          <button class="button button-light" id="shareLocationBtn">Share my location</button>
+        </div>
+        <p class="hero-note">Local roadside support for Limpopo communities</p>
+      </div>
+
+      <div class="hero-card">
+        <div class="signal-icon" aria-hidden="true">LOCAL HELP</div>
+        <h2>Start with where you are</h2>
+        <p>A nearby clinic, school or familiar local place can help people find you.</p>
+        <div class="landmark-example">Example: Near the clinic in my village</div>
+      </div>
+    </section>
+
+    <section class="emergency-strip">
+      <div>
+        <strong>Immediate danger?</strong>
+        <span>Contact emergency services directly.</span>
+      </div>
+      <div class="emergency-actions">
+        <a href="tel:112" class="button button-danger">Call emergency 112</a>
+        <button class="button button-outline" id="sosOpen" type="button" aria-haspopup="dialog">Police / ambulance options</button>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="section-heading">
+        <span class="eyebrow">HOW WE CAN HELP</span>
+        <h2>Choose the help you need</h2>
+        <p>Designed around common roadside problems in rural communities.</p>
+      </div>
+
+      <div class="services-grid">
+        <button class="service-card" data-service="Breakdown">
+          <span class="service-icon" aria-hidden="true">01</span>
+          <strong>Vehicle breakdown</strong>
+          <span>My vehicle has stopped</span>
+        </button>
+        <button class="service-card" data-service="Mechanic">
+          <span class="service-icon" aria-hidden="true">02</span>
+          <strong>Mechanic</strong>
+          <span>Vehicle repair assistance</span>
+        </button>
+        <button class="service-card" data-service="Towing">
+          <span class="service-icon" aria-hidden="true">03</span>
+          <strong>Towing</strong>
+          <span>Move my broken vehicle</span>
+        </button>
+        <button class="service-card" data-service="Fuel delivery">
+          <span class="service-icon" aria-hidden="true">04</span>
+          <strong>Fuel delivery</strong>
+          <span>I've run out of fuel</span>
+        </button>
+        <button class="service-card" data-service="Medical emergency">
+          <span class="service-icon" aria-hidden="true">05</span>
+          <strong>Medical emergency</strong>
+          <span>Urgent medical assistance</span>
+        </button>
+        <button class="service-card" data-service="Police or fire">
+          <span class="service-icon" aria-hidden="true">06</span>
+          <strong>Police </strong>
+          <span>Police or danger</span>
+        </button>
+      </div>
+      <p class="small-note">Selecting a service fills in the request form. It does not contact that service.</p>
+    </section>
+
+    <section class="section request-section" id="request">
+      <div class="section-heading">
+        <span class="eyebrow">ROADSIDE ASSISTANCE</span>
+        <h2>Request help</h2>
+        <p>Enter the clearest location details you can.</p>
+      </div>
+
+      <form id="requestForm" class="request-form">
+        <div class="form-grid">
+          <label>
+            Your name
+            <input id="userName" name="userName" type="text"
+              placeholder="Enter your name" required maxlength="80">
+          </label>
+          <label>
+            Contact number
+            <input id="phone" name="phone" type="tel"
+              placeholder="e.g. 0712345678" required maxlength="20">
+          </label>
+          <label>
+            Type of help
+            <select id="serviceType" name="serviceType" required>
+              <option value="">Select a service</option>
+              <option>Breakdown</option>
+              <option>Mechanic</option>
+              <option>Towing</option>
+              <option>Fuel delivery</option>
+              <option>Medical emergency</option>
+              <option value="Police or fire">Police / fire</option>
+            </select>
+          </label>
+          <label>
+            Municipality or area
+            <input id="area" name="area" type="text"
+              placeholder="e.g. Lebowakgomo" required maxlength="100">
+          </label>
+          <label class="full-width">
+            Village, road or nearest landmark
+            <input id="landmark" name="landmark" type="text"
+              placeholder="e.g. Near a school, clinic or filling station"
+              required maxlength="180">
+          </label>
+          <label class="full-width">
+            Describe the problem
+            <textarea id="details" name="details" rows="4"
+              placeholder="Explain what happened and any important details."
+              maxlength="1000" required></textarea>
+          </label>
+          <label class="full-width upload-field">
+            Photo of the form or incident (optional)
+            <input id="evidencePhoto" name="evidencePhoto" type="file" accept="image/jpeg,image/png,image/webp">
+            <span class="small-note">JPG, PNG or WebP · up to 8 MB. The image is resized on this device before saving.</span>
+            <img id="evidencePreview" class="evidence-preview" alt="Selected photo preview" hidden>
+            <span id="photoStatus" class="small-note" role="status"></span>
+          </label>
+        </div>
+
+        <div class="location-box">
+          <div>
+            <strong>GPS location (optional)</strong>
+            <p id="locationStatus">You can use GPS or enter your location manually above.</p>
+          </div>
+          <button class="button button-outline" type="button" id="getLocationBtn">
+            Get my GPS
+          </button>
+        </div>
+
+        <p class="small-note">GPS is optional. Your browser may ask for location permission. Manual location details are still required.</p>
+        <div id="medicalFinder" class="medical-finder" hidden>
+          <h3>Find nearby medical facilities</h3>
+          <p>With your permission, your coordinates will be sent to the OpenStreetMap Overpass service to search nearby facilities. This only helps you find a place to call; it does not dispatch help.</p>
+          <label class="consent-line"><input id="medicalConsent" type="checkbox"> I agree to share my GPS coordinates for this search.</label>
+          <button class="button button-outline" id="findMedicalBtn" type="button">Search nearby hospitals</button>
+          <div id="medicalResult" role="status" aria-live="polite"></div>
+          <p class="small-note">For an ambulance in South Africa, call <a href="tel:10177">10177</a>, or <a href="tel:112">112</a> from a mobile phone.</p>
+        </div>
+        <button class="button button-primary full-button" type="submit">
+          Save request
+        </button>
+           </form>
+
+      <div id="requestResult" class="result-panel" role="status" aria-live="polite" hidden></div>
+    </section>
+
+    <section class="section track-section" id="track">
+      <div class="section-heading">
+        <span class="eyebrow">REQUEST STATUS</span>
+        <h2>Track your  request</h2>
+        <p>Enter the reference number shown after you save a request on this device.</p>
+      </div>
+      <form id="trackForm" class="track-form">
+        <label for="referenceInput">Request reference</label>
+        <div class="track-row">
+          <input id="referenceInput" placeholder="e.g. RR-123456" required>
+          <button class="button button-primary" type="submit">Check status</button>
+        </div>
+      </form>
+      <div id="trackResult" class="result-panel" role="status" aria-live="polite" hidden></div>
+    </section>
+
+    <section class="difference-section how-it-works" id="how-it-works">
+      <div class="section-heading">
+        <span class="eyebrow">A CLEARER WAY TO ASK FOR HELP</span>
+        <h2>How a request works</h2>
+        <p>Share the details you have, then keep your request reference.</p>
+      </div>
+      <div class="difference-grid">
+        <article>
+          <span class="step-number" aria-hidden="true">01</span>
+          <span class="step-visual location-visual" aria-hidden="true"><span class="map-road"></span><span class="map-pin"></span></span>
+          <h3>Share your location</h3>
+          <p>Use GPS if available, or describe your village, road or a nearby landmark.</p>
+        </article>
+        <article>
+          <span class="step-number" aria-hidden="true">02</span>
+          <span class="step-visual request-visual" aria-hidden="true"><span class="form-lines"></span><span class="photo-tile"></span></span>
+          <h3>Send the request</h3>
+          <p>Choose the help you need, explain what happened and add an incident photo if useful.</p>
+        </article>
+        <article>
+          <span class="step-number" aria-hidden="true">03</span>
+          <span class="step-visual tracking-visual" aria-hidden="true"><span class="ticket-reference">RR-••••••</span><span class="ticket-status">STATUS</span></span>
+          <h3>Track the reference</h3>
+          <p>Enter your reference in Track Request to check the recorded status. Requests also appear in the admin dashboard.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="#home">
+      <img class="brand-icon" src="roadrescue-logo.svg" alt="">
+      <span>RoadRescue <b>SA</b><small>LIMPOPO EDITION</small></span>
+    </a>
+    <p> Designed for rural roadside assistance</p>
+    <p><a href="admin.html">Admin dashboard</a></p>
+  
+    <p>© <span id="year"></span> RoadRescue SA</p>
+  </footer>
+
+  <a class="floating-sos" href="tel:112" aria-label="Call mobile emergency number 112">SOS · Call 112</a>
+  <dialog id="sosDialog" class="sos-dialog" aria-labelledby="sosTitle">
+    <div class="sos-dialog-head"><h2 id="sosTitle">Choose emergency service</h2><button id="sosClose" class="dialog-close" type="button" aria-label="Close">Close</button></div>
+    <p>Select Police or Hospital / ambulance to open your phone's dialler. No alert is sent by the website.</p>
+    <div class="sos-choices">
+      <a class="sos-choice police-choice" href="tel:10111" aria-label="Call Police at 10111"><strong>Call Police</strong><span>10111</span></a>
+      <a class="sos-choice medical-choice" href="tel:10177" aria-label="Call ambulance at 10177"><strong>Call ambulance</strong><span>10177</span></a>
+    </div>
+    <p class="sos-secondary">Mobile emergency number: <a href="tel:112">Call 112</a></p>
+  </dialog>
+
+  <script src="backend-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="scritp.js"></script>
+</body>
+</html>

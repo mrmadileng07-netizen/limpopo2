@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102a43">
+  <meta name="description" content="RoadRescue SA request administration dashboard.">
+  <title>Admin Dashboard | RoadRescue SA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="RoadRescue SA user page">
+      <img class="brand-icon" src="roadrescue-logo.svg" alt="">
+      <span>RoadRescue <b>SA</b><small>ADMIN DASHBOARD</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle"
+      aria-label="Open navigation" aria-expanded="false">Menu</button>
+    <nav id="mainNav">
+      <a href="index.html" data-en="User page" data-ns="Letlakala la modiriši">User page</a>
+      <button id="languageToggle" class="language-button" type="button">Sepedi</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="departmentAccess" class="section admin-access">
+      <div class="admin-access-card">
+        <span class="eyebrow">ADMIN ACCESS</span>
+        <h1>Choose your department</h1>
+        <p>Select the department you work with and enter the admin PIN to open its request dashboard.</p>
+        <form id="departmentAccessForm">
+          <label for="departmentSelect">Department</label>
+          <select id="departmentSelect" required>
+            <option value="All">All services</option>
+            <option value="Breakdown">Breakdown</option>
+            <option value="Mechanic">Mechanic</option>
+            <option value="Towing">Towing</option>
+            <option value="Fuel delivery">Fuel delivery</option>
+            <option value="Medical emergency">Medical emergency</option>
+            <option value="Police or fire">Police / fire</option>
+          </select>
+          <div id="supabaseAdminCredentials" class="admin-cloud-credentials" hidden>
+            <label for="cloudAdminEmail">Admin email</label>
+            <input id="cloudAdminEmail" type="email" autocomplete="username" readonly>
+            <label for="cloudAdminPassword">Admin account password</label>
+            <input id="cloudAdminPassword" type="password" autocomplete="current-password">
+          </div>
+          <label for="adminPin">Admin PIN</label>
+          <input id="adminPin" name="adminPin" type="password" inputmode="numeric" autocomplete="off" required>
+          <button class="button button-primary" type="submit">Open dashboard</button>
+          <p id="departmentAccessError" class="admin-access-error" role="alert" hidden>That PIN is not correct. Please try again.</p>
+        </form>
+      </div>
+    </section>
+
+    <div id="adminDashboard" hidden>
+    <section class="section admin-section">
+      <div class="section-heading">
+        <span class="eyebrow">REQUEST MANAGEMENT</span>
+        <h2 id="departmentDashboardHeading">Main Admin Dashboard · All Services</h2>
+      </div>
+
+      <div class="dashboard-toolbar">
+        <div class="stat-card">
+          <span>Total requests</span>
+          <strong id="totalRequests">0</strong>
+        </div>
+        <div class="stat-card"><span>Today</span><strong id="dailyRequests">0</strong></div>
+        <div class="stat-card"><span>This week</span><strong id="weeklyRequests">0</strong></div>
+        <div class="stat-card"><span>This month</span><strong id="monthlyRequests">0</strong></div>
+        <div class="stat-card"><span>This year</span><strong id="yearlyRequests">0</strong></div>
+      </div>
+
+      <div id="serviceDashboards" class="service-dashboards" role="group" aria-label="Request dashboards by service">
+        <button class="service-dashboard-tab is-active" type="button" data-service-filter="All" aria-pressed="true">All inboxes <span data-service-count="All">0</span></button>
+        <button class="service-dashboard-tab" type="button" data-service-filter="Breakdown" aria-pressed="false">Breakdown inbox <span data-service-count="Breakdown">0</span></button>
+        <button class="service-dashboard-tab" type="button" data-service-filter="Mechanic" aria-pressed="false">Mechanic inbox <span data-service-count="Mechanic">0</span></button>
+        <button class="service-dashboard-tab" type="button" data-service-filter="Towing" aria-pressed="false">Towing inbox <span data-service-count="Towing">0</span></button>
+        <button class="service-dashboard-tab" type="button" data-service-filter="Fuel delivery" aria-pressed="false">Fuel delivery inbox <span data-service-count="Fuel delivery">0</span></button>
+        <button class="service-dashboard-tab" type="button" data-service-filter="Medical emergency" aria-pressed="false">Medical emergency inbox <span data-service-count="Medical emergency">0</span></button>
+        <button class="service-dashboard-tab" type="button" data-service-filter="Police or fire" aria-pressed="false">Police inbox <span data-service-count="Police or fire">0</span></button>
+      </div>
+      <div id="departmentDashboardActions" class="department-dashboard-actions" hidden>
+        <a class="department-back-link" href="admin.html">All service inboxes</a>
+        <button id="copyDepartmentLink" class="department-copy-link" type="button">Copy this department dashboard link</button>
+      </div>
+      <h3 id="serviceDashboardTitle" class="service-dashboard-title">All service inboxes</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Reference</th>
+              <th>User and contact</th>
+              <th>Service</th>
+              <th>Location</th>
+              <th>Problem</th>
+              <th>Photo</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="requestsTable">
+            <tr><td colspan="8">No requests yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      
+    </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="index.html">
+      <img class="brand-icon" src="roadrescue-logo.svg" alt="">
+      <span>RoadRescue <b>SA</b><small>LIMPOPO EDITION</small></span>
+    </a>
+    <p>Request administration</p>
+  </footer>
+
+  <script src="backend-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="scritp.js"></script>
+</body>
+</html>
