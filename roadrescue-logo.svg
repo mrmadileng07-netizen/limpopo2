@@ -1,9 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" role="img" aria-labelledby="title desc">
   <title id="title">RoadRescue SA logo</title>
-  <rect x="3" y="3" width="90" height="90" rx="25" fill="#fff"/>
-  <path d="M48 14 78 26v20c0 19-12 31-30 38C30 77 18 65 18 46V26z" fill="#102a43"/>
-  <path d="M48 22 70 31v15c0 14-8 23-22 30-14-7-22-16-22-30V31z" fill="#1d4e70"/>
-  <path d="m48 27-3 18h7l-4 22 13-28h-9l5-12z" fill="#ff5967"/>
-  <path d="M20 70h56" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".9"/>
-  <circle cx="27" cy="70" r="4" fill="#ff5967"/><circle cx="69" cy="70" r="4" fill="#ff5967"/>
+  <desc id="desc">Shield badge with road and sun to represent roadside emergency assistance for Limpopo communities.</desc>
+
+  <defs>
+    <linearGradient id="sunGlow" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#FFD15C"/>
+      <stop offset="100%" stop-color="#FF9F1C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Shield badge -->
+  <g transform="translate(12 8)">
+    <path d="M60 0 L96 12 V48 C96 71 78 86 60 94 C42 86 24 71 24 48 V12 L60 0 Z" fill="#102A43"/>
+    <path d="M60 12 L82 19 V46 C82 61 71 73 60 80 C49 73 38 61 38 46 V19 L60 12 Z" fill="#173E63"/>
+
+    <!-- Road -->
+    <path d="M43 28 L60 60 L78 60" fill="none" stroke="#F7F9FC" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M47 38 L60 58" fill="none" stroke="#FFD15C" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 8"/>
+
+    <!-- Sun accent -->
+    <circle cx="78" cy="20" r="10" fill="url(#sunGlow)"/>
+    <circle cx="78" cy="20" r="3" fill="#FFF7D6"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(130 29)">
+    <text x="0" y="22" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="800" fill="#102A43" letter-spacing="-0.5">RoadRescue</text>
+    <text x="0" y="52" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#FF9F1C" letter-spacing="2">SA</text>
+    <text x="54" y="52" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#6B7A8A" letter-spacing="2">LIMPOPO EDITION</text>
+  </g>
 </svg>
